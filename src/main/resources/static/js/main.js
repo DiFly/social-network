@@ -27,7 +27,7 @@ Vue.component('message-form', {
     template:
         '<div>' +
             '<input type="text" placeholder="Write something" v-model="text"/>' +
-            '<input type="button" value="Save" v-on:click="save"/>' +
+            '<input type="button" value="Save" @click="save"/>' +
         '</div>',
     methods: {
         save: function () {
@@ -36,7 +36,7 @@ Vue.component('message-form', {
             if (this.id) {
                 messageApi.update({id: this.id}, message).then(result =>
                     result.json().then(data => {
-                        let index = getIndex(data.id);
+                        var index = getIndex(this.messages, data.id);
                         this.messages.splice(index, 1, data);
                         this.text = '';
                         this.id = '';
