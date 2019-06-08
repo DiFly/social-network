@@ -1,14 +1,12 @@
 package org.difly.socialnetwork.controller;
 
 import org.difly.socialnetwork.domain.Message;
-import org.difly.socialnetwork.exception.NotFoundException;
 import org.difly.socialnetwork.repository.MessageRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("message")
@@ -47,9 +45,7 @@ public class MessageController {
     }
 
     @DeleteMapping("{id}")
-    public void delete(@PathVariable String id){
-        Map<String, String> message = getMessage(id);
-
-        messages.remove(message);
+    public void delete(@PathVariable("id") Message message){
+        messageRepository.delete(message);
     }
 }
