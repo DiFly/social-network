@@ -1,11 +1,14 @@
 package org.difly.socialnetwork.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.difly.socialnetwork.domain.Message;
+import org.difly.socialnetwork.domain.Views;
 import org.difly.socialnetwork.repository.MessageRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,19 +22,20 @@ public class MessageController {
     }
 
     @GetMapping
+    @JsonView(Views.IdName.class)
     public List<Message> list(){
         return messageRepository.findAll();
     }
 
     @GetMapping("{id}")
+    @JsonView(Views.FullMessage.class)
     public Message getOne(@PathVariable("id") Message message){
         return message;
     }
 
-
-
     @PostMapping
     public Message create(@RequestBody Message message){
+        message.setCreationDate(LocalDateTime.now());
         return messageRepository.save(message);
     }
 
@@ -41,7 +45,7 @@ public class MessageController {
             @RequestBody Message message){
         BeanUtils.copyProperties(message, messageFromDb, "id");
 
-        return messageRepository.save(message);
+        return messageRepository.save(messageFromDb);
     }
 
     @DeleteMapping("{id}")
