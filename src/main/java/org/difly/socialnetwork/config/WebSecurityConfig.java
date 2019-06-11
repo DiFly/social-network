@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import java.time.LocalDateTime;
+
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
@@ -29,15 +31,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PrincipalExtractor principalExtractor(UserDetailsRepository userDetailsRepository){
         return map -> {
             String id = (String) map.get("sub");
-            userDetailsRepository.findOne(id).orElseGet(() -> {
+            User user = userDetailsRepository.findById(id).orElseGet(() -> {
                 User newUser = new User();
 
                 newUser.setId(id);
-                newUser.setName(map.get("name"));
+                newUser.setName((String) map.get("name"));
+                newUser.setEmail((String) map.get("email"));
+                newUser.setGender((String) map.get("gender"));
+                newUser.setLocale((String) map.get("locale"));
+                newUser.setUserpic((String) map.get("picture"));
 
                 return newUser;
             });
-            return new User();
+
+            user.setLastVisit(LocalDateTime.now());
+
+            return userDetailsRepository.save(user);
         };
     }
 }
