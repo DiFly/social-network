@@ -1,3 +1,10 @@
+import Vue from 'vue'
+
+new Vue({
+    el: app,
+})
+
+/*
 function getIndex(list, id) {
     for (let i = 0; i<list.length; i++) {
         if (list[i].id === id) {
@@ -110,12 +117,5 @@ var app = new Vue({
     data: {
         messages: frontendData.messages,
         profile: frontendData.profile
-    },
-    created: function () {
-        // messageApi.get().then(result =>
-        //     result.json().then( data =>
-        //         data.forEach(message => this.messages.push(message))
-        //     )
-        // )
     }
-});
+});*/
