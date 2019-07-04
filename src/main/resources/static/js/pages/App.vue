@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="main-app">
         <div v-if="!profile">Must to login from
             <a href="/login">GOOGLE</a>
         </div>
@@ -41,5 +41,8 @@
 </script>
 
 <style>
+    .main-app {
+        color: maroon;
+    }
 
 </style>
