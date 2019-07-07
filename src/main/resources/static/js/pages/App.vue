@@ -1,14 +1,28 @@
 <template>
-    <div class="main-app">
-        <div v-if="!profile">Must to login from
-            <a href="/login">GOOGLE</a>
-        </div>
-        <div v-else>
-            <div>{{profile.name}}&nbsp;<a href="/logout">Logout</a></div>
-            <messages-list :messages="messages" />
-        </div>
-    </div>
+    <v-app>
+        <v-toolbar app>
+            <v-toolbar-title>
+                Web Messenger
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
 
+            <span v-if="profile">
+                {{profile.name}}
+            </span>
+
+            <v-btn v-if="profile" icon href="/logout">
+                <v-icon>exit_to_app</v-icon>
+            </v-btn>
+        </v-toolbar>
+        <v-content>
+            <v-container v-if="!profile">Must to login from
+                <a href="/login">GOOGLE</a>
+            </v-container>
+            <v-container v-if="profile">
+                <messages-list :messages="messages" />
+            </v-container>
+        </v-content>
+    </v-app>
 </template>
 
 <script>
@@ -41,8 +55,5 @@
 </script>
 
 <style>
-    .main-app {
-        color: maroon;
-    }
 
 </style>
