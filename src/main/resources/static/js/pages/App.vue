@@ -15,25 +15,17 @@
             </v-btn>
         </v-toolbar>
         <v-content>
-            <v-container v-if="!profile">Must to login from
-                <a href="/login">GOOGLE</a>
-            </v-container>
-            <v-container v-if="profile">
-                <messages-list />
-            </v-container>
+
+            <router-view></router-view>
         </v-content>
     </v-app>
 </template>
 
 <script>
     import { mapState, mapMutations } from 'vuex'
-    import MessagesList from 'components/messages/MessageList.vue'
     import { addHandler} from "util/ws"
 
     export default {
-        components:{
-            MessagesList
-        },
         computed: mapState(['profile']),
         methods: mapMutations (['addMessageMutation', 'updateMessageMutation', 'removeMessageMutation']),
         created() {
