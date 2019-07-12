@@ -1,6 +1,10 @@
 <template>
     <v-layout row>
-        <v-text-field label="New message" placeholder="Write something" v-model="text"/>
+        <v-text-field
+                label="New message"
+                placeholder="Write something"
+                v-model="text"
+        />
         <v-btn @click="save">
             Save
         </v-btn>
@@ -19,7 +23,7 @@
             }
         },
         watch: {
-            messageAttr: function(newVal, oldVal){
+            messageAttr(newVal, oldVal){
                 this.text = newVal.text
                 this.id = newVal.id
             }
@@ -38,9 +42,9 @@
                 } else {
                     this.addMessageAction(message)
                 }
+
                 this.text = ''
                 this.id = ''
-
             }
         }
     }

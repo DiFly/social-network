@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PrincipalExtractor principalExtractor(UserDetailsRepository userDetailsRepository){
         return map -> {
             String id = (String) map.get("sub");
+
             User user = userDetailsRepository.findById(id).orElseGet(() -> {
                 User newUser = new User();
 

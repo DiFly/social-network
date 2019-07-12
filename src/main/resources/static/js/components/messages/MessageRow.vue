@@ -1,7 +1,7 @@
 <template>
     <v-card class="my-2">
         <v-card-text primary-title>
-            <i>( {{message.id }} )</i>
+            <i>( {{ message.id }} )</i>
             {{ message.text }}
         </v-card-text>
         <v-card-actions>
@@ -15,6 +15,7 @@
 
 <script>
     import { mapActions } from 'vuex'
+
     export default {
         props: ['message', 'editMessage'],
         methods: {

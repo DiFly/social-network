@@ -50,7 +50,7 @@ public class MessageController {
     }
 
     @PutMapping("{id}")
-    public Message change(
+    public Message update (
             @PathVariable("id") Message messageFromDb,
             @RequestBody Message message){
         BeanUtils.copyProperties(message, messageFromDb, "id");
@@ -66,11 +66,4 @@ public class MessageController {
         messageRepository.delete(message);
         wsSender.accept(EventType.REMOVE, message);
     }
-
-//    @MessageMapping("/changeMessage")
-//    @SendTo("/topic/activity")
-//    public Message change(Message message){
-//        return messageRepository.save(message);
-//    }
-
 }
