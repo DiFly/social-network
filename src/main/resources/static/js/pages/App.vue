@@ -4,11 +4,20 @@
             <v-toolbar-title>
                 Web Messenger
             </v-toolbar-title>
+            <v-btn flat
+                   v-if="profile"
+                    :disabled="$route.path === '/'"
+                    @click="showMessages">
+                Messages
+            </v-btn>
             <v-spacer></v-spacer>
 
-            <span v-if="profile">
+            <v-btn flat
+                   v-if="profile"
+                   :disabled="$route.path === '/profile'"
+                    @click="showProfile">
                 {{profile.name}}
-            </span>
+            </v-btn>
 
             <v-btn v-if="profile" icon href="/logout">
                 <v-icon>exit_to_app</v-icon>
@@ -27,7 +36,15 @@
 
     export default {
         computed: mapState(['profile']),
-        methods: mapMutations (['addMessageMutation', 'updateMessageMutation', 'removeMessageMutation']),
+        methods: {
+            ...mapMutations (['addMessageMutation', 'updateMessageMutation', 'removeMessageMutation']),
+            showMessages(){
+                this.$router.push('/')
+            },
+            showProfile(){
+                this.$router.push('/profile')
+            }
+        },
         created() {
             addHandler(data => {
                 if (data.objectType === 'MESSAGE') {
@@ -49,6 +66,11 @@
                     console.error(`Looks like the object type if unknown "${data.objectType}"`)
                 }
             })
+        },
+        beforeMount() {
+            if (!this.profile) {
+                this.$router.replace('/auth')
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout justify-space-around>
-            <v-flex>
+            <v-flex :xs6="!$vuetify.breakpoint.xsOnly">
                 <div class="title mb-3">User profile</div>
                 <v-layout row justify-space-between>
                     <v-flex class="px-1">
