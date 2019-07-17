@@ -17,8 +17,8 @@
         computed: {
             targetSrc(){
                 let parts = this.src.split('/');
-                return `https://www.youtube.com/embed/${parts[parts.length-1]}`
-                //RzEiCguFZiY
+                let clearPath =  parts[parts.length-1].replace('watch?v=', '');
+                return `https://www.youtube.com/embed/${clearPath}`;
             }
         }
     }
