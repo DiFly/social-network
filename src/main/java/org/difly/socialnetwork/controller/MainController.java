@@ -44,7 +44,7 @@ public class MainController {
         if (user != null) {
             data.put("profile", user);
             String messages = writer.writeValueAsString(messageRepository.findAll());
-            data.put("messages", messages);
+            model.addAttribute("messages", messages);
         }
 
         model.addAttribute("frontendData", data);
