@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import messagesApi from 'api/messages'
-import commetApi from 'api/comment'
+import commentApi from 'api/comment'
 
 Vue.use(Vuex)
 
@@ -54,7 +54,7 @@ export default new Vuex.Store({
                 },
                 ...state.messages.slice(updateIndex + 1)
             ]
-        }
+        },
     },
     actions: {
         async addMessageAction({commit, state}, message) {
@@ -81,9 +81,8 @@ export default new Vuex.Store({
             }
         },
         async addCommentAction({commit, state}, comment) {
-            const response = await commetApi.add(comment)
-            const data = response.json()
-
+            const response = await commentApi.add(comment)
+            const data = await response.json()
             commit('addCommentMutation', comment)
         }
     }

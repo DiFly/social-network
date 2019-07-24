@@ -1,7 +1,9 @@
 package org.difly.socialnetwork.controller;
 
+import org.codehaus.jackson.map.annotate.JsonView;
 import org.difly.socialnetwork.domain.Comment;
 import org.difly.socialnetwork.domain.User;
+import org.difly.socialnetwork.domain.Views;
 import org.difly.socialnetwork.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,6 +23,7 @@ public class CommentController {
     }
 
     @PostMapping
+    @JsonView(Views.FullMessage.class)
     public Comment create(
             @RequestBody Comment comment,
             @AuthenticationPrincipal User user
