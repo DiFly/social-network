@@ -1,6 +1,6 @@
 package org.difly.socialnetwork.controller;
 
-import org.codehaus.jackson.map.annotate.JsonView;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.difly.socialnetwork.domain.Comment;
 import org.difly.socialnetwork.domain.User;
 import org.difly.socialnetwork.domain.Views;
@@ -27,7 +27,7 @@ public class CommentController {
     public Comment create(
             @RequestBody Comment comment,
             @AuthenticationPrincipal User user
-    ){
+    ) {
         return commentService.create(comment, user);
     }
 }

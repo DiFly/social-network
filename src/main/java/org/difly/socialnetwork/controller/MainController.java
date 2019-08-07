@@ -19,15 +19,15 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("/")
 public class MainController {
-    private final MessageRepository messageRepository;
+    private final MessageRepository messageRepo;
 
     @Value("${spring.profiles.active}")
     private String profile;
     private final ObjectWriter writer;
 
     @Autowired
-    public MainController(MessageRepository messageRepository, ObjectMapper mapper) {
-        this.messageRepository = messageRepository;
+    public MainController(MessageRepository messageRepo, ObjectMapper mapper) {
+        this.messageRepo = messageRepo;
 
         this.writer = mapper
                 .setConfig(mapper.getSerializationConfig())
@@ -43,12 +43,13 @@ public class MainController {
 
         if (user != null) {
             data.put("profile", user);
-            String messages = writer.writeValueAsString(messageRepository.findAll());
+            String messages = writer.writeValueAsString(messageRepo.findAll());
             model.addAttribute("messages", messages);
         }
 
         model.addAttribute("frontendData", data);
         model.addAttribute("isDevMode", "dev".equals(profile));
+
         return "index";
     }
 }

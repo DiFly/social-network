@@ -1,12 +1,12 @@
 <template>
     <v-card class="my-2">
         <v-card-text primary-title>
-            <i>( {{ message.id }} )</i>
+            <i>({{ message.id }})</i>
             {{ message.text }}
         </v-card-text>
         <media v-if="message.link" :message="message"></media>
         <v-card-actions>
-            <v-btn @click="edit" small flat round>Edit</v-btn>
+            <v-btn value="Edit" @click="edit" small flat round>Edit</v-btn>
             <v-btn icon @click="del" small>
                 <v-icon>delete</v-icon>
             </v-btn>
@@ -21,8 +21,7 @@
 <script>
     import { mapActions } from 'vuex'
     import Media from 'components/media/Media.vue'
-    import CommentList from "../comment/CommentList.vue";
-
+    import CommentList from '../comment/CommentList.vue'
     export default {
         props: ['message', 'editMessage'],
         components: { CommentList, Media },
@@ -31,7 +30,7 @@
             edit() {
                 this.editMessage(this.message)
             },
-            del(){
+            del() {
                 this.removeMessageAction(this.message)
             }
         }
@@ -39,5 +38,4 @@
 </script>
 
 <style>
-
 </style>

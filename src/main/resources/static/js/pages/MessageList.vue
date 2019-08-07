@@ -21,13 +21,13 @@
             MessageForm
         },
         data() {
-            return{
+            return {
                 message: null
             }
         },
-        computed: mapGetters (['sortedMessages']),
+        computed: mapGetters(['sortedMessages']),
         methods: {
-            editMessage (message) {
+            editMessage(message) {
                 this.message = message
             }
         }
@@ -35,5 +35,4 @@
 </script>
 
 <style>
-
 </style>
