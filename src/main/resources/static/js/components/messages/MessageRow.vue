@@ -4,7 +4,7 @@
             <div>
                 <v-avatar
                         v-if="message.author && message.author.userpic"
-                        size="36px"
+                        size="48px"
                 >
                     <img :src="message.author.userpic"
                          :alt="message.author.name"
@@ -18,9 +18,9 @@
                 >
                     <v-icon dark>account_circle</v-icon>
                 </v-avatar>
-                {{ authorName }}
+                <span class="pl-3">{{ authorName }}</span>
             </div>
-            <div>
+            <div class="pt-3">
                 {{ message.text }}
             </div>
         </v-card-text>
